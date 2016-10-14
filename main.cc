@@ -13,7 +13,7 @@ int main()
   {
     cfgfile.open("./testgen.cfg", ios::out);
     cout << "config not found, generating config file testgen.cfg."<<endl<<"Set your templates folder and adjust the other settings" << endl;
-    cfgfile << "path/to/templatesfolder" << endl << "/tmp" << endl << "latexmk -f -pdf main.tex" << endl << "evince main.pdf" << endl;
+    cfgfile << "./templates" << endl << "/tmp" << endl << "latexmk -f -pdf main.tex" << endl << "evince main.pdf" << endl;
     cfgfile.close();
     return 0;
   }
@@ -28,23 +28,25 @@ int main()
   cout << "available subjects:" << endl;
   for(int i=0;i<_dirlist.size();i++)
   {
-    cout << _dirlist[i] << endl;
+    cout << i+1 << ": " <<_dirlist[i] << endl;
   }
+  int iSelect;
   string sSubject;
-  cout << "select test subject" << endl;
-  cin >> sSubject;
+  cout << "select test subject number" << endl;
+  cin >> iSelect;
+  sSubject=_dirlist[iSelect-1];
  
   _dirlist=MyDir::getAllSubdirs(sTempPath+"/"+sSubject);
  
   cout << "available classes:" << endl;
   for(int i=0;i<_dirlist.size();i++)
   {
-    cout << _dirlist[i] << endl;
+    cout << i+1 << ": " << _dirlist[i] << endl;
   }
   string sClass;
   cout << "select class" << endl;
-  cin >> sClass;
-
+  cin >> iSelect;
+  sClass=_dirlist[iSelect-1];
   return 0;
 }
 

@@ -13,7 +13,7 @@ MyDir::dirlist MyDir::getAllSubdirs(string path)
     /* print all the files and directories within directory */
     while ((ent = readdir (dir)) != NULL)
     {
-      if((ent->d_type == DT_DIR) && (strcmp(ent->d_name,".")!=0) && (strcmp(ent->d_name,"..")!=0))
+      if((ent->d_type == DT_DIR) && (strcmp(ent->d_name,".")!=0) && (strcmp(ent->d_name,"..")!=0) && (strcmp(ent->d_name,"templatebase")!=0))
         list.push_back(ent->d_name);
     }  
     closedir (dir);

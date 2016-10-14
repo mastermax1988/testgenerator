@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 #include "include/dir.h"
+#include "include/generator.h"
+
 using namespace std;
 
 //main program
@@ -36,7 +38,7 @@ int main()
   cin >> iSelect;
   sSubject=_dirlist[iSelect-1];
  
-  _dirlist=MyDir::getAllSubdirs(sTempPath+"/"+sSubject);
+  _dirlist=MyDir::getAllSubdirs(sTemplatesPath+"/"+sSubject);
  
   cout << "available classes:" << endl;
   for(int i=0;i<_dirlist.size();i++)
@@ -47,6 +49,10 @@ int main()
   cout << "select class" << endl;
   cin >> iSelect;
   sClass=_dirlist[iSelect-1];
+
+  _dirlist=MyDir::getAllSubdirs(sTemplatesPath+"/"+sSubject+"/"+sClass);
+  cout << _dirlist[0] << endl;
+  generator *gen=new generator(sTempPath, sMake, sShow);
   return 0;
 }
 

@@ -10,6 +10,7 @@ class MyDir
   public:
     typedef vector<string> dirlist;
     static dirlist getAllSubdirs(string);
+    static void createDir(string);
 };
 
 #endif

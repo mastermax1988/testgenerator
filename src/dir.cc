@@ -3,6 +3,9 @@
 #include <iostream>
 #include <string.h>
 #include <algorithm>
+#define BOOST_NO_CXX11_SCOPED_ENUMS
+#include <boost/filesystem.hpp>
+#undef BOOST_NO_CXX11_SCOPED_ENUMS
 MyDir::dirlist MyDir::getAllSubdirs(string path)
 {
   MyDir::dirlist list;
@@ -26,4 +29,8 @@ MyDir::dirlist MyDir::getAllSubdirs(string path)
   return list;
 }
 
-
+void MyDir::createDir(string s)
+{
+  boost::filesystem::path dir(s);
+  boost::filesystem::create_directory(dir);
+}

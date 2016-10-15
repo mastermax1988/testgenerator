@@ -52,7 +52,8 @@ int main()
 
   _dirlist=MyDir::getAllSubdirs(sTemplatesPath+"/"+sSubject+"/"+sClass);
   cout << _dirlist[0] << endl;
-  generator *gen=new generator(sTempPath, sMake, sShow);
+  generator *gen=new generator(sTemplatesPath,sTempPath, sMake, sShow);
+  gen->showAvailableTests(sTemplatesPath+"/"+sSubject+"/"+sClass);
   return 0;
 }
 

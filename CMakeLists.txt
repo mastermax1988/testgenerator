@@ -1,5 +1,7 @@
 cmake_minimum_required (VERSION 2.6)
 project (testgenerator)
+find_package(Boost COMPONENTS system filesystem REQUIRED)
 FILE(GLOB mysrc src/*.cc)
 add_compile_options(-O2)
 add_executable(testgenerator ${mysrc} main.cc)
+target_link_libraries(testgenerator ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})

@@ -1,5 +1,6 @@
 cmake_minimum_required (VERSION 2.6)
 project (testgenerator)
+add_definitions(-std=gnu++0x)
 find_package(Boost COMPONENTS system filesystem REQUIRED)
 FILE(GLOB mysrc src/*.cc)
 add_compile_options(-O2)

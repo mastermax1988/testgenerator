@@ -15,13 +15,15 @@ int main()
   {
     cfgfile.open("./testgen.cfg", ios::out);
     cout << "config not found, generating config file testgen.cfg."<<endl<<"Set your templates folder and adjust the other settings" << endl;
-    cfgfile << "./templates" << endl << "/tmp" << endl << "latexmk -f -pdf main.tex" << endl << "evince main.pdf" << endl;
+    cfgfile << "./templates" << endl << "/tmp" << endl << "/tmp/savedtests" << endl<< "latexmk -f -pdf" << endl << "evince" << endl;
     cfgfile.close();
     return 0;
   }
-  string sTemplatesPath, sTempPath, sMake, sShow;
+  string sTemplatesPath, sTempPath, sMake, sShow, sSaveBasePath;
   getline(cfgfile,sTemplatesPath);
   getline(cfgfile,sTempPath);
+  getline(cfgfile,sSaveBasePath);
+  MyDir::createDir(sSaveBasePath);
   getline(cfgfile,sMake);
   getline(cfgfile,sShow);
   MyDir::dirlist _dirlist;
@@ -53,7 +55,16 @@ int main()
   _dirlist=MyDir::getAllSubdirs(sTemplatesPath+"/"+sSubject+"/"+sClass);
   cout << _dirlist[0] << endl;
   generator *gen=new generator(sTemplatesPath,sTempPath, sMake, sShow);
-  gen->showAvailableTests(sTemplatesPath+"/"+sSubject+"/"+sClass);
+  string sBasePath=sTemplatesPath+"/"+sSubject+"/"+sClass;
+  gen->showAvailableTests(sBasePath);
+  string sSelectedTestNumbers;
+  cout << "Enter test numbers to generate new test, seperated my colon"<<endl;
+  cin >> sSelectedTestNumbers;
+  string sPath;
+  cout << "enter save path: " + sSaveBasePath+"/" << endl;
+  cin >> sPath;
+  sPath=sSaveBasePath+"/"+sPath;
+  gen->generateTestFromSelectionString(sBasePath, sSelectedTestNumbers, sPath);
   return 0;
 }
 

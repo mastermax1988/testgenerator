@@ -20,17 +20,21 @@
 \usepackage{longtable}
 \usepackage{ulem}
 \usepackage{amssymb}
-\geometry{a4paper, portrait, inner=2.5cm, outer=2cm, top=2cm, bottom=3cm}
+\geometry{a4paper, portrait, left=2cm, right=2cm, top=1cm, bottom=3cm}
 \newcommand{\changefont}[3]{
 \fontfamily{#1} \fontseries{#2} \fontshape{#3} \fontsize{12}{15} \selectfont}
 \newcommand{\grid}[1]{
 \begin{tikzpicture}
-\draw[step=0.5cm,color=gray] (0,0) grid (15cm ,#1);
+\draw[step=0.5cm,color=gray] (0,0) grid (13cm ,#1);
 \end{tikzpicture}}
+\usepackage{makecell}
 \begin{document}
 \changefont{ptm}{m}{n}
-Klasse 5a - 1. Schulaufgabe im Fach Mathematik - hub
-\begin{longtable}{|p{1cm} p{1cm}|p{15cm}|p{1cm}|p{1cm}|}
+Klasse 5a \hspace{2cm} 1. Schulaufgabe im Fach Mathematik \hspace{2cm} Schuljahr 2016/17\\
+\textbf{Vor- und Nachname:}\hspace{11.5cm}Note:
+\begin{longtable}{|p{5mm} | p{5mm}|p{13cm}|p{5mm}|p{5mm}|}
+\hline
+Nr&&&BE&\\
 #CONTENT
 \end{longtable}
 \end{document}

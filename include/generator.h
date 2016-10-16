@@ -14,9 +14,11 @@ class generator
     generator(string, string, string, string); //temppath, make, pdfapp
     ~generator(){}
     void showAvailableTests(string); //basepath
-    void generateTest(dirlist, string); //selected tests, savedirectory
+    void generateTestFromSelectionString(string, string, string);//basepath, sel, savedir
   private:
     string sTemplates, sTemp, sMake, sShow;
+    void generateTest(dirlist, string); //selected tests, savedirectory
+    dirlist getAllTests(string);
 
 };
 

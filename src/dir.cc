@@ -58,7 +58,12 @@ void MyDir::createDir(string s)
   boost::filesystem::path dir(s);
   boost::filesystem::create_directory(dir);
 }
-
+bool MyDir::bTestExists(string s)
+{
+  boost::filesystem::path dir(s+"/main.tex");
+  cout << s << "/main.tex" << endl;
+  return boost::filesystem::exists(s);
+}
 void MyDir::copyImages(string source, string dest)
 {
   MyDir::createDir(dest);

@@ -74,6 +74,11 @@ int main()
   string sPath;
   cout << "enter save path: " + sSaveBasePath+"/" << endl;
   cin >> sPath;
+  while(MyDir::bTestExists(sSaveBasePath + "/" + sPath))
+  {
+    cout << sSaveBasePath << "/main.tex existiert bereits!" << endl;
+    cin >> sPath;
+  }
   sPath=sSaveBasePath+"/"+sPath;
   gen->generateTestFromSelectionString(sBasePath, sSelectedTestNumbers, sPath);
   return 0;

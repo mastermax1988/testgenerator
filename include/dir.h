@@ -14,6 +14,7 @@ class MyDir
     static void createDir(string);
     static void copyImages(string, string);//sourcedirectory, destdirectory
     static filelist getAllFiles(string);
+    static bool bTestExists(string);
 };
 
 #endif

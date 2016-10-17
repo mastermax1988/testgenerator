@@ -76,7 +76,7 @@ int main()
   cin >> sPath;
   while(MyDir::bTestExists(sSaveBasePath + "/" + sPath))
   {
-    cout << sSaveBasePath << "/main.tex existiert bereits!" << endl;
+    cout << sSaveBasePath << "/main.tex exists!" << endl;
     cin >> sPath;
   }
   sPath=sSaveBasePath+"/"+sPath;

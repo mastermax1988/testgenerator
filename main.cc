@@ -53,8 +53,19 @@ int main()
   sClass=_dirlist[iSelect-1];
 
   _dirlist=MyDir::getAllSubdirs(sTemplatesPath+"/"+sSubject+"/"+sClass);
-  cout << _dirlist[0] << endl;
-  generator *gen=new generator(sTemplatesPath,sTempPath, sMake, sShow);
+  
+  string sCName, sTitle, sDate;
+  cin.ignore (numeric_limits<std::streamsize>::max(), '\n');//flush for getline 
+  cout << "Enter class name, e.g. Klasse 5a" << endl;
+  getline(cin,sCName);
+  
+  cout << "Enter test title, e.g. 1. Schulaufgabe" << endl;
+  getline(cin,sTitle);
+  
+  cout << "Enter test date" << endl;
+  getline(cin,sDate);
+
+  generator *gen=new generator(sTemplatesPath,sTempPath, sMake, sShow,sCName,sTitle, sDate);
   string sBasePath=sTemplatesPath+"/"+sSubject+"/"+sClass;
   gen->showAvailableTests(sBasePath);
   string sSelectedTestNumbers;

@@ -2,12 +2,15 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
 
-generator::generator(string s1, string s2, string s3, string s4)
+generator::generator(string s1, string s2, string s3, string s4, string s5, string s6, string s7)
 {
   sTemplates=s1;
   sTemp=s2;
   sMake=s3;
   sShow=s4;
+  sClass=s5;
+  sTestName=s6;
+  sTestDate=s7;
 }
 MyDir::dirlist generator::getAllTests(string sPath)
 {
@@ -38,6 +41,7 @@ void generator::showAvailableTests(string sPath)
   }
   MyDir::dirlist availableTests=getAllTests(sPath);
   generateTest(availableTests, sTemp+"/testgenerator");
+  createNamesTex(sTemp+"/testgenerator",true);
   string s="cd "+sTemp+"/testgenerator;"+ sMake+" "+sTemp+"/testgenerator/main.tex";
   command::exec(s.c_str());
   command::exec((sShow+" "+sTemp+"/testgenerator/main.pdf&").c_str());
@@ -54,10 +58,25 @@ void generator::generateTestFromSelectionString(string sPath, string sSelect, st
   for(int i=0;i<iSelectedNumbers.size();i++)
     selectedTests.push_back(availableTests[iSelectedNumbers[i]]);
   generateTest(selectedTests, sSavePath);
+  createNamesTex(sSavePath,false);
   string s="cd "+sSavePath+";"+ sMake+" " + "main.tex";
   command::exec(s.c_str());
   command::exec((sShow+" "+sSavePath+"/main.pdf&").c_str());
 
+}
+
+void generator::createNamesTex(string sPath, bool bOverview)
+{
+  ofstream file(sPath+"/names.tex");
+  if(!file.is_open())
+  {
+    cout << "can't write names.tex" << endl;
+    throw 0;
+  }
+  file << "\\newcommand{\\myclassname}[0]{"<<(bOverview?"":sClass)<<"}" << endl;
+  file << "\\newcommand{\\mytitle}[0]{"<<(bOverview?"":sTestName)<<"}" << endl;
+  file << "\\newcommand{\\testdate}[0]{"<<(bOverview?"":sTestDate)<<"}" << endl;
+  file.close();
 }
 void generator::generateTest(generator::dirlist _dirlist, string sSavePath)
 {

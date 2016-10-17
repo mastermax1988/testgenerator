@@ -30,7 +30,8 @@
 \usepackage{makecell}
 \begin{document}
 \changefont{ptm}{m}{n}
-Klasse 5a \hspace{2cm} 1. Schulaufgabe im Fach Mathematik \hspace{2cm} Schuljahr 2016/17\\
+\input{names.tex}
+\myclassname \hspace{2cm} \mytitle \hspace{2cm} \testdate\\
 \textbf{Vor- und Nachname:}\hspace{11.5cm}Note:
 \begin{longtable}{|p{5mm} | p{5mm}|p{13cm}|p{5mm}|p{5mm}|}
 \hline

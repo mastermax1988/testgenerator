@@ -137,6 +137,7 @@ void generator::generateTest(generator::dirlist _dirlist, string sSavePath)
     }
     generatedtest << "\\hline" << endl;
     iTestNr++;
+    MyDir::copyImages(_dirlist[i]+"/img",sSavePath+"/img");
     testfile.close();
   }
   while(getline(templatefile,line))

@@ -28,9 +28,53 @@ MyDir::dirlist MyDir::getAllSubdirs(string path)
   sort(list.begin(),list.end(),[](string a, string b) { return a < b; });
   return list;
 }
+MyDir::dirlist MyDir::getAllFiles(string path)
+{
+  MyDir::filelist list;
+  DIR *dir;
+  struct dirent *ent;
+  if ((dir = opendir (path.c_str())) != NULL) 
+  {
+    /* print all the files and directories within directory */
+    while ((ent = readdir (dir)) != NULL)
+    {
+      if((ent->d_type != DT_DIR) && (strcmp(ent->d_name,".")!=0) && (strcmp(ent->d_name,"..")!=0) && (strcmp(ent->d_name,"templatebase")!=0))
+        list.push_back(ent->d_name);
+    }  
+    closedir (dir);
+  }
+  else
+  {
+    cout << "err" << endl;
+  }
+  sort(list.begin(),list.end(),[](string a, string b) { return a < b; });
+  return list;
+}
+
+
 
 void MyDir::createDir(string s)
 {
   boost::filesystem::path dir(s);
   boost::filesystem::create_directory(dir);
+}
+
+void MyDir::copyImages(string source, string dest)
+{
+  MyDir::createDir(dest);
+  MyDir::filelist list=MyDir::getAllFiles(source);
+  for(int i=0;i<list.size();i++)
+  {
+
+    boost::filesystem::path sdir(source+"/"+list[i]);
+    boost::filesystem::path ddir(dest+"/"+list[i]);
+    if(boost::filesystem::exists(ddir))
+    {
+      boost::filesystem::remove(ddir);
+      cout << "Warning! Image overwritten!" << endl;
+    }
+    
+    boost::filesystem::copy_file(sdir, ddir);
+  }
+  
 }

@@ -1,6 +1,8 @@
-#5
-Berechne $1\cdot(-1)$
+#5#Berechne jeweils:
+$1\cdot(-1)$
 \grid{2cm}
 #14
-Berechne $1+2\cdot3$
+$1+2\cdot3$
 \grid{1cm}
+#3#Achte auf GZ:
+$\pi\cdot3.14$

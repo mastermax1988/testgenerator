@@ -101,7 +101,7 @@ void generator::generateTest(generator::dirlist _dirlist, string sSavePath)
     bool bSubtasks=false;
     int iBE;
     for(int j=1;j<testcontent.size();j++)
-      if(testcontent[0][0]=='#')
+      if(testcontent[j][0]=='#')
       {
         bSubtasks=true;
         break;
@@ -116,6 +116,8 @@ void generator::generateTest(generator::dirlist _dirlist, string sSavePath)
         boost::split(strs,testcontent[j],boost::is_any_of("#"));
         if(cSubtask=='a')
           generatedtest << iTestNr;
+        if(strs.size()>2)
+          generatedtest << "&&" << strs[2] << "&&\\\\" << endl << "\\hline";
         generatedtest  << "&" << (bSubtasks?cSubtask:' ') << "&";
         cout << strs[1] << endl;
         iBE=boost::lexical_cast<int>(strs[1]);

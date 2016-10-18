@@ -137,7 +137,7 @@ void generator::generateTest(generator::dirlist _dirlist, string sSavePath)
           generatedtest << iTestNr;
         if(strs.size()>2)
           generatedtest << "&&" << strs[2] << "&&\\\\" << endl << "\\hline";
-        generatedtest  << "&" << (bSubtasks?cSubtask:' ') << "&";
+        generatedtest  << "&" << (bSubtasks?cSubtask:' ') << (bSubtasks?")&":"&");
         cout << strs[1] << endl;
         iBE=boost::lexical_cast<int>(strs[1]);
         cSubtask++;

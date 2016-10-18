@@ -162,5 +162,7 @@ void generator::generateTest(generator::dirlist _dirlist, string sSavePath)
   while(getline(templatefile,line))
     generatedtest << line << endl;
   generatedtest.close();
-
+  ofstream makefile;
+  makefile.open(sSavePath+"/makefile");
+  makefile << "#testgenerator" << endl << "new:"<< endl << "\t" <<sMake <<" main.tex" << endl;
 }

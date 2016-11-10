@@ -28,7 +28,7 @@ int main()
   getline(cfgfile,sShow);
   MyDir::dirlist _dirlist;
   _dirlist=MyDir::getAllSubdirs(sTemplatesPath);
- 
+
   cout << "available subjects:" << endl;
   for(int i=0;i<_dirlist.size();i++)
   {
@@ -39,9 +39,9 @@ int main()
   cout << "select test subject number" << endl;
   cin >> iSelect;
   sSubject=_dirlist[iSelect-1];
- 
+
   _dirlist=MyDir::getAllSubdirs(sTemplatesPath+"/"+sSubject);
- 
+
   cout << "available classes:" << endl;
   for(int i=0;i<_dirlist.size();i++)
   {
@@ -53,21 +53,25 @@ int main()
   sClass=_dirlist[iSelect-1];
 
   _dirlist=MyDir::getAllSubdirs(sTemplatesPath+"/"+sSubject+"/"+sClass);
-  
+
   string sCName, sTitle, sDate;
   cin.ignore (numeric_limits<std::streamsize>::max(), '\n');//flush for getline 
-  cout << "Enter class name, e.g. Klasse 5a" << endl;
+  cout << "Enter class name, e.g. Klasse 5a. Enter '-' for preview mode" << endl;
   getline(cin,sCName);
-  
-  cout << "Enter test title, e.g. 1. Schulaufgabe" << endl;
-  getline(cin,sTitle);
-  
-  cout << "Enter test date" << endl;
-  getline(cin,sDate);
+  bool bPreviewMode=(sCName=="-");
+  if(!bPreviewMode)
+  {
+    cout << "Enter test title, e.g. 1. Schulaufgabe" << endl;
+    getline(cin,sTitle);
 
+    cout << "Enter test date" << endl;
+    getline(cin,sDate);
+  }
   generator *gen=new generator(sTemplatesPath,sTempPath, sMake, sShow,sCName,sTitle, sDate);
   string sBasePath=sTemplatesPath+"/"+sSubject+"/"+sClass;
   gen->showAvailableTests(sBasePath);
+  if(bPreviewMode)
+    return 0;
   string sSelectedTestNumbers;
   cout << "Enter test numbers to generate new test, seperated my colon"<<endl;
   cin >> sSelectedTestNumbers;

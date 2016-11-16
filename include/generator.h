@@ -15,12 +15,12 @@ class generator
     ~generator(){}
     void showAvailableTests(string); //basepath
     void generateTestFromSelectionString(string, string, string);//basepath, sel, savedir
+    void createFromOneExercise(string);
   private:
     string sTemplates, sTemp, sMake, sShow, sClass, sTestName, sTestDate;
     void generateTest(dirlist, string); //selected tests, savedirectory
     dirlist getAllTests(string);
     void createNamesTex(string, bool);//sPath, bool bOnlyOverview;
-
 };
 
 #endif

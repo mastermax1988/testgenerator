@@ -56,10 +56,12 @@ int main()
 
   string sCName, sTitle, sDate;
   cin.ignore (numeric_limits<std::streamsize>::max(), '\n');//flush for getline 
-  cout << "Enter class name, e.g. Klasse 5a. Enter '-' for preview mode" << endl;
+  cout << "Enter class name, e.g. Klasse 5a. Enter '-' for preview mode and '+' to add a new exercise" << endl;
   getline(cin,sCName);
   bool bPreviewMode=(sCName=="-");
-  if(!bPreviewMode)
+  bool bNewExerciseMode=(sCName=="+");
+
+  if(!bPreviewMode && !bNewExerciseMode)
   {
     cout << "Enter test title, e.g. 1. Schulaufgabe" << endl;
     getline(cin,sTitle);
@@ -67,7 +69,32 @@ int main()
     cout << "Enter test date" << endl;
     getline(cin,sDate);
   }
+  string sNewExercisePath;
+  if(bNewExerciseMode)
+  {
+    string s;
+    cout << "enter template folder name" << endl;
+      cin >> s;
+    while(MyDir::bTemlateExists(sTemplatesPath+"/"+sSubject+"/"+sClass + "/" + s))
+    {
+      cout << "test exists!" << endl;
+      cin >> s;
+    }
+    sNewExercisePath=sTemplatesPath+"/"+sSubject+"/"+sClass + "/" + s;
+    MyDir::createEmptyTemplate(sNewExercisePath);
+  }
   generator *gen=new generator(sTemplatesPath,sTempPath, sMake, sShow,sCName,sTitle, sDate);
+  if(bNewExerciseMode)
+  {
+    string s="+";
+    while(s=="+")
+    {
+      gen->createFromOneExercise(sNewExercisePath);
+      cout << "enter + to recreate" << endl;
+      cin >> s;
+    }
+    return 0;
+  }
   string sBasePath=sTemplatesPath+"/"+sSubject+"/"+sClass;
   gen->showAvailableTests(sBasePath);
   if(bPreviewMode)

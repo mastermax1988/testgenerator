@@ -15,6 +15,8 @@ class MyDir
     static void copyImages(string, string);//sourcedirectory, destdirectory
     static filelist getAllFiles(string);
     static bool bTestExists(string);
+    static bool bTemlateExists(string);
+    static void createEmptyTemplate(string);
 };
 
 #endif

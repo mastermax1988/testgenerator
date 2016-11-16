@@ -64,6 +64,23 @@ bool MyDir::bTestExists(string s)
   cout << s << "/main.tex" << endl;
   return boost::filesystem::exists(s);
 }
+bool MyDir::bTemlateExists(string s)
+{
+  boost::filesystem::path dir(s+"/test");
+  cout << s << "/main.tex" << endl;
+  return boost::filesystem::exists(s);
+}
+
+void MyDir::createEmptyTemplate(string s)
+{
+  MyDir::createDir(s);
+  MyDir::createDir(s+"/img");
+  fstream _fs;
+  _fs.open(s+"/test", ios::out);
+  _fs << "#0" << endl;
+  _fs.close();
+}
+
 void MyDir::copyImages(string source, string dest)
 {
   MyDir::createDir(dest);

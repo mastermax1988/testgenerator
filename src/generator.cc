@@ -128,6 +128,7 @@ void generator::generateTest(generator::dirlist _dirlist, string sSavePath)
     cout << "testcontent size " << testcontent.size() << endl;
     char cSubtask='a';
     bool bSubtasks=false;
+    bool bInMulticol=false;
     int iBE;
     for(int j=1;j<testcontent.size();j++)
       if(testcontent[j][0]=='#')
@@ -146,7 +147,7 @@ void generator::generateTest(generator::dirlist _dirlist, string sSavePath)
         if(cSubtask=='a')
           generatedtest << iTestNr;
         if(strs.size()>2)
-          generatedtest << "&&" << strs[2] << "&&\\\\" << endl << "\\hline";
+          generatedtest << "&\\multicolumn{2}{p{14cm}|}{" << strs[2] << "}&&\\\\" << endl << "\\hline";
         generatedtest  << "&" << (bSubtasks?cSubtask:' ') << (bSubtasks?")&":"&");
         cout << strs[1] << endl;
         iBE=boost::lexical_cast<int>(strs[1]);
@@ -154,8 +155,8 @@ void generator::generateTest(generator::dirlist _dirlist, string sSavePath)
       }
       else
       {
-        if(testcontent[j-1][0]!='#')
-          generatedtest << "\\newline";
+        if((testcontent[j-1][0]!='#'))
+          generatedtest << "\\newline ";
         generatedtest  << testcontent[j];
       }
       cout << j << endl;

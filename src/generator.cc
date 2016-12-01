@@ -84,6 +84,7 @@ void generator::createFromOneExercise(string s)
   generator::dirlist list;
   list.push_back(s);
   generator::generateTest(list,sTemp+"/testgenerator");
+  createNamesTex(sTemp+"/testgenerator",true);
   s="cd "+sTemp+"/testgenerator;"+ sMake+" " + "main.tex";
   command::printoutput(command::exec(s.c_str()));
   command::exec((sShow+" "+sTemp+"/testgenerator/main.pdf&").c_str());

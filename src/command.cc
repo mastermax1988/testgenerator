@@ -3,9 +3,18 @@
 #include <stdlib.h>
 #include <string>
 #include <stdio.h>
-
+#include <thread>
 using namespace std;
 using namespace boost;
+
+void command::threadexec(const char* cmd)
+{
+  thread t ( exec, cmd);
+
+  this_thread::sleep_for(chrono::seconds(2)); //make sure evince opens
+  t.detach();
+}
+
 command::cmd_return_type command::exec(const char* cmd)
 {
 	FILE* pipe = popen(cmd, "r");

@@ -44,7 +44,7 @@ void generator::showAvailableTests(string sPath)
   createNamesTex(sTemp+"/testgenerator",true);
   string s="cd "+sTemp+"/testgenerator;"+ sMake+" "+sTemp+"/testgenerator/main.tex";
   command::exec(s.c_str());
-  command::exec((sShow+" "+sTemp+"/testgenerator/main.pdf&").c_str());
+  command::threadexec((sShow+" "+sTemp+"/testgenerator/main.pdf&").c_str());
 }
 void generator::generateTestFromSelectionString(string sPath, string sSelect, string sSavePath)
 {
@@ -61,7 +61,7 @@ void generator::generateTestFromSelectionString(string sPath, string sSelect, st
   createNamesTex(sSavePath,false);
   string s="cd "+sSavePath+";"+ sMake+" " + "main.tex";
   command::exec(s.c_str());
-  command::exec((sShow+" "+sSavePath+"/main.pdf&").c_str());
+  command::threadexec((sShow+" "+sSavePath+"/main.pdf&").c_str());
 
 }
 
@@ -87,7 +87,7 @@ void generator::createFromOneExercise(string s)
   createNamesTex(sTemp+"/testgenerator",true);
   s="cd "+sTemp+"/testgenerator;"+ sMake+" " + "main.tex";
   command::printoutput(command::exec(s.c_str()));
-  command::exec((sShow+" "+sTemp+"/testgenerator/main.pdf&").c_str());
+  command::threadexec((sShow+" "+sTemp+"/testgenerator/main.pdf&").c_str());
 }
 void generator::generateTest(generator::dirlist _dirlist, string sSavePath)
 {

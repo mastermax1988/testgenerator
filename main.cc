@@ -3,7 +3,6 @@
 #include <string>
 #include "include/dir.h"
 #include "include/generator.h"
-
 using namespace std;
 
 //main program

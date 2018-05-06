@@ -125,7 +125,15 @@ void generator::generateTest(generator::dirlist _dirlist, string sSavePath)
 			cout << "can'r open " << _dirlist[i] << "/test" << endl;
 		vector<string> testcontent;
 		while(getline(testfile, line))
-			testcontent.push_back(line);
+		{
+			if(line[0] == '.')
+			{
+				line[0] = ' ';
+				testcontent[testcontent.size() - 1] += line;
+			}
+			else
+				testcontent.push_back(line);
+		}
 		cout << "testcontent size " << testcontent.size() << endl;
 		char cSubtask = 'a';
 		bool bSubtasks = false;
@@ -156,10 +164,8 @@ void generator::generateTest(generator::dirlist _dirlist, string sSavePath)
 			}
 			else
 			{
-				if((testcontent[j - 1][0] != '#') && testcontent[j][0] != '.')
+				if((testcontent[j - 1][0] != '#'))
 					generatedtest << "\\newline ";
-				if(testcontent[j][0] == '.') // no newline on code
-					testcontent[j][0] = ' ';
 				generatedtest  << testcontent[j];
 			}
 			cout << j << endl;

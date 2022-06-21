@@ -1,5 +1,6 @@
 #include "../include/dir.h"
 #include "dirent.h"
+#include <fstream>
 #include <iostream>
 #include <string.h>
 #include <algorithm>
